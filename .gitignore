@@ -1,0 +1,23 @@
+# secrets (never commit these)
+secrets.h
+**/secrets.h
+.env
+CLAUDE.local.md
+hub/node-red/flows_cred.json
+hub/mosquitto/passwd
+
+# build output
+.pio/
+build/
+*.bin
+*.elf
+*.map
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
