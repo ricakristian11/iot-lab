@@ -73,3 +73,4 @@ mosquitto_pub -h localhost -u hubuser -P '<password>' -t apartment/bedroom/esp32
 - `D33` and `D35` look alike on the silkscreen. The PIR stayed silent until the wire was moved.
 - Verify a "BME280" by chip ID: `0x60` = BME280, `0x58` = BMP280 (no humidity).
 - **v0.3.1:** the BH1750 is re-armed (power on + continuous mode) after every read. A supply glitch from wiggling a wire restarts it in power-down mode, where it still answers on I2C but reads 0 lux forever.
+- **v0.3.2:** `meta` reports `reset` (why the node last started), so an unexpected reboot seen on the hub can be told apart: power loss, brownout or crash. On the ESP32 the EN button reports `poweron`.

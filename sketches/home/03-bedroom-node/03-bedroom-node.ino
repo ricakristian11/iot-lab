@@ -11,6 +11,7 @@
 // Topics: see shared/topics.md. Wiring: see README.md in this folder.
 
 #include <WiFi.h>
+#include <esp_system.h>   // esp_reset_reason()
 #include <Wire.h>
 #include <ArduinoOTA.h>
 #include <ArduinoMqttClient.h>
@@ -142,6 +143,25 @@ void publishClimate() {
   }
 }
 
+// Why the chip last started. Captured once in setup() and reported in meta, so an
+// unexpected reboot seen on the hub can be told apart: power loss vs crash vs brownout.
+// Note: on the ESP32 the EN button is a chip power-on reset, so it reports "poweron".
+const char* bootReason = "unknown";
+
+const char* resetReasonName(esp_reset_reason_t r) {
+  switch (r) {
+    case ESP_RST_POWERON:   return "poweron";    // power applied, USB replugged, or EN pressed
+    case ESP_RST_SW:        return "software";   // esp_restart(), e.g. after an OTA update
+    case ESP_RST_PANIC:     return "panic";      // crash (exception)
+    case ESP_RST_INT_WDT:   return "int_wdt";    // interrupt watchdog
+    case ESP_RST_TASK_WDT:  return "task_wdt";   // task watchdog: loop() blocked too long
+    case ESP_RST_WDT:       return "wdt";        // other watchdog
+    case ESP_RST_DEEPSLEEP: return "deepsleep";
+    case ESP_RST_BROWNOUT:  return "brownout";   // supply voltage dipped
+    default:                return "other";
+  }
+}
+
 void publishMeta() {
   JsonDocument d;
   d["fw"]       = FW_VERSION;
@@ -152,6 +172,7 @@ void publishMeta() {
   d["bme280"]   = bmeOk;
   d["oled"]     = oledOk;
   d["bh1750"]   = bh1750Ok;
+  d["reset"]    = bootReason;
   publishJson("meta", d, true);
 }
 
@@ -388,7 +409,8 @@ void updateScreen(uint32_t now) {
 // ---------------------------------------------------------------- setup / loop
 void setup() {
   Serial.begin(115200);
-  LOG("\n[BOOT] %s/%s fw %s\n", ROOM, DEVICE_ID, FW_VERSION);
+  bootReason = resetReasonName(esp_reset_reason());
+  LOG("\n[BOOT] %s/%s fw %s (reset: %s)\n", ROOM, DEVICE_ID, FW_VERSION, bootReason);
   snprintf(baseTopic, sizeof baseTopic, "apartment/%s/%s", ROOM, DEVICE_ID);
 
   pinMode(PIN_PIR, INPUT);

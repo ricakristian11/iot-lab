@@ -16,7 +16,7 @@ Scheme: `apartment/<room>/<device>/<metric>`
 | `apartment/bedroom/esp32-01/motion` | `{"motion":1}` (sent on change) | yes | 0 | esp32-01 |
 | `apartment/bedroom/esp32-01/light` | `{"lux":123.3}` (only if a BH1750 is fitted) | no | 0 | esp32-01 |
 | `apartment/bedroom/esp32-01/screen` | `{"mode":"auto","on":true}` | yes | 0 | esp32-01 |
-| `apartment/bedroom/esp32-01/meta` | `{"fw":"0.3.0","ip":"…","rssi":-45,"uptime_s":3600,…}` | yes | 0 | esp32-01 |
+| `apartment/bedroom/esp32-01/meta` | `{"fw":"0.3.2","ip":"…","rssi":-45,"uptime_s":3600,"heap":…,"reset":"poweron",…}` | yes | 0 | esp32-01 |
 
 ## Commands (to devices)
 
@@ -31,3 +31,6 @@ Commands use QoS 1 and are not retained.
 - `apartment/+/+/climate`: every room's climate (Climate page)
 - `apartment/+/+/motion`: Motion page
 - `apartment/+/+/status`: System page
+
+
+**`meta.reset`** (fw ≥ 0.3.2): why the node last started — `poweron` (power applied, USB replugged or EN pressed), `software` (e.g. after OTA), `panic`, `int_wdt`, `task_wdt`, `wdt`, `brownout`, `deepsleep`, `other`.

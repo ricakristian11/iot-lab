@@ -66,3 +66,9 @@ Added ArduinoOTA, started only after Wi-Fi connects. Firmware now updates from t
 **Symptom:** light dropped from ~28,000 lux (flashlight) to exactly 0 and stayed there; `meta` still showed `bh1750: true`.
 **Diagnosis:** the read still returned 2 bytes, so the sensor was answering on I2C. Exactly 0 with room lights on points to the module having restarted in power-down mode after a supply glitch while the connections were being checked. The firmware only sent power-on + continuous mode once at boot.
 **Fix:** v0.3.1 re-arms the sensor after every read (power on + continuous mode, no reset).
+
+## 2026-10-22 — Overnight run: one reboot → v0.3.2
+- 17.6 h run (`uptime_s` 63,360), heap flat at ~205–209 KB, RSSI −38 to −57 dBm.
+- At 16:57 `uptime_s` restarted from 0: the node **rebooted** (not a Wi-Fi drop). Because it reconnected with the same client ID before the broker had noticed the old connection was dead, the broker published the old connection's `offline` and the new `online` in the same second.
+- Cause unknown: the firmware didn't record why it started. v0.3.2 adds `reset` to `meta` (poweron / brownout / panic / watchdog …) to diagnose the next one.
+- **Most likely cause: the PC waking from sleep.** Windows logged "returned from low power state" (Power-Troubleshooter, event 1) at 16:57:29; the node booted ~4 s later (≈16:57:33). No restart/shutdown events (1074/6005/6006) in that window. Whether a USB port loses power on resume depends on the motherboard/BIOS. Fix: the node now runs from a USB wall charger.
