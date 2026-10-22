@@ -1,0 +1,822 @@
+[
+    {
+        "id": "1dd859827f0fa913",
+        "type": "tab",
+        "label": "Climate",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d5871ab58e5eb178",
+        "type": "tab",
+        "label": "Motion",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9d42db8f0367d55d",
+        "type": "tab",
+        "label": "System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c0a1dded81d8d3dd",
+        "type": "tab",
+        "label": "Light",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4a31bd33f32a496d",
+        "type": "mqtt-broker",
+        "name": "hub",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "56f25d38b9a1f0af",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "9e5ac7339483ed69",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#0d74ce",
+            "bgPage": "#f9f9fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "44958aec0155ce73",
+        "type": "ui-page",
+        "name": "Climate",
+        "ui": "56f25d38b9a1f0af",
+        "path": "/climate",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "9e5ac7339483ed69",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "6d94e16a9eae3d15",
+        "type": "ui-group",
+        "name": "Bedroom",
+        "page": "44958aec0155ce73",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "627d235187236259",
+        "type": "ui-group",
+        "name": "History",
+        "page": "44958aec0155ce73",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "0665987d9333b184",
+        "type": "ui-page",
+        "name": "Motion",
+        "ui": "56f25d38b9a1f0af",
+        "path": "/motion",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "9e5ac7339483ed69",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "169a77accc945329",
+        "type": "ui-group",
+        "name": "Bedroom",
+        "page": "0665987d9333b184",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "7645ca579c168e64",
+        "type": "ui-page",
+        "name": "System",
+        "ui": "56f25d38b9a1f0af",
+        "path": "/system",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "9e5ac7339483ed69",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "5e8069a799fa1454",
+        "type": "ui-group",
+        "name": "Nodes",
+        "page": "7645ca579c168e64",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
+        "id": "5f813a1cac6eb65f",
+        "type": "mqtt in",
+        "z": "1dd859827f0fa913",
+        "name": "",
+        "topic": "apartment/+/+/climate",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "4a31bd33f32a496d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "c766aa8905367448",
+                "899ed848bfdb9f01"
+            ]
+        ]
+    },
+    {
+        "id": "c766aa8905367448",
+        "type": "debug",
+        "z": "1dd859827f0fa913",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "899ed848bfdb9f01",
+        "type": "function",
+        "z": "1dd859827f0fa913",
+        "name": "function 1",
+        "func": "const room = msg.topic.split('/')[1];\nconst p = msg.payload;\nreturn [\n    { payload: p.t, topic: room + \" temp\" },\n    { payload: p.h, topic: room + \" humidity\" },\n    { payload: p.p, topic: room + \" pressure\" }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "cf70ee582a0b0c95",
+                "995e2a7336adbc70"
+            ],
+            [
+                "38ce9ccb1f32a9a2",
+                "995e2a7336adbc70"
+            ],
+            [
+                "bc71d73dfebf767b"
+            ]
+        ]
+    },
+    {
+        "id": "cf70ee582a0b0c95",
+        "type": "ui-gauge",
+        "z": "1dd859827f0fa913",
+        "name": "",
+        "group": "6d94e16a9eae3d15",
+        "order": 3,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#00d5ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "18",
+                "color": "#1eff00",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "28",
+                "color": "#eeff00",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "33",
+                "color": "#ff4000",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "40",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 750,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38ce9ccb1f32a9a2",
+        "type": "ui-gauge",
+        "z": "1dd859827f0fa913",
+        "name": "",
+        "group": "6d94e16a9eae3d15",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Humidity",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#ffff00",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "30",
+                "color": "#00ff04",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "60",
+                "color": "#ffff00",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 740,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc71d73dfebf767b",
+        "type": "ui-text",
+        "z": "1dd859827f0fa913",
+        "group": "6d94e16a9eae3d15",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Pressure (hPa)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 760,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "995e2a7336adbc70",
+        "type": "ui-chart",
+        "z": "1dd859827f0fa913",
+        "group": "627d235187236259",
+        "name": "",
+        "label": "Temperature & Humidity",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "Time",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "topic",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "24",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 790,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb684f139dfd6210",
+        "type": "mqtt in",
+        "z": "d5871ab58e5eb178",
+        "name": "",
+        "topic": "apartment/+/+/motion",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "4a31bd33f32a496d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "83e2c9a3911150a8"
+            ]
+        ]
+    },
+    {
+        "id": "83e2c9a3911150a8",
+        "type": "function",
+        "z": "d5871ab58e5eb178",
+        "name": "function 2",
+        "func": "const room = msg.topic.split('/')[1];\nconst moving = msg.payload.motion === 1;\nconst status = { payload: moving ? \"Motion detected\" : \"Clear\", topic: room };\nconst last = moving ? { payload: new Date().toLocaleTimeString() } : null;\nreturn [status, last];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 120,
+        "wires": [
+            [
+                "8f20e3f7f1717376"
+            ],
+            [
+                "24f190d988f7af08"
+            ]
+        ]
+    },
+    {
+        "id": "8f20e3f7f1717376",
+        "type": "ui-text",
+        "z": "d5871ab58e5eb178",
+        "group": "169a77accc945329",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "24f190d988f7af08",
+        "type": "ui-text",
+        "z": "d5871ab58e5eb178",
+        "group": "169a77accc945329",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last motion",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 570,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "800f0de638fd2eda",
+        "type": "mqtt in",
+        "z": "9d42db8f0367d55d",
+        "name": "",
+        "topic": "apartment/+/+/status",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "4a31bd33f32a496d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "8ed39d0df147e7b9"
+            ]
+        ]
+    },
+    {
+        "id": "8ed39d0df147e7b9",
+        "type": "ui-text",
+        "z": "9d42db8f0367d55d",
+        "group": "5e8069a799fa1454",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "esp32-01",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 380,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "cb6c1f0e58380bcc",
+        "type": "mqtt in",
+        "z": "c0a1dded81d8d3dd",
+        "name": "",
+        "topic": "apartment/bedroom/esp32-01/light",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "4a31bd33f32a496d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "11ca36600cdfef85"
+            ]
+        ]
+    },
+    {
+        "id": "11ca36600cdfef85",
+        "type": "change",
+        "z": "c0a1dded81d8d3dd",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lux",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 60,
+        "wires": [
+            [
+                "bf9be17244f23f55",
+                "97aa404b235c9447"
+            ]
+        ]
+    },
+    {
+        "id": "bf9be17244f23f55",
+        "type": "ui-text",
+        "z": "c0a1dded81d8d3dd",
+        "group": "6d94e16a9eae3d15",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Light (lux)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 640,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "97aa404b235c9447",
+        "type": "ui-chart",
+        "z": "c0a1dded81d8d3dd",
+        "group": "6d94e16a9eae3d15",
+        "name": "",
+        "label": "Light (lux)",
+        "order": 9007199254740991,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload.lux",
+        "yAxisPropertyType": "msg",
+        "ymin": "",
+        "ymax": "",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 640,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de1972fb96b22210",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.33.0"
+        }
+    }
+]

@@ -88,6 +88,16 @@ bool bh1750Begin() {
   return bh1750Command(0x01) && bh1750Command(0x07) && bh1750Command(0x10);
 }
 
+// Re-arm after every read. If the module's supply glitches (e.g. a wire is wiggled), the
+// BH1750 restarts in power-down mode: it still ACKs on I2C but returns 0 forever.
+// Power-on + continuous mode is harmless when it's already running; the next result is
+// ready in ~120-180 ms, long before the next 30 s read. (No 0x07 reset here: that would
+// clear the result register.)
+void bh1750Rearm() {
+  bh1750Command(0x01);
+  bh1750Command(0x10);
+}
+
 float bh1750ReadLux() {
   if (Wire.requestFrom(ADDR_BH1750, (size_t)2) != 2) return NAN;
   const uint8_t hi = Wire.read();  // read order matters: high byte first
@@ -267,7 +277,10 @@ void readSensors() {
     readings.h = bme.readHumidity();
     readings.p = bme.readPressure() / 100.0f;  // Pa -> hPa
   }
-  if (bh1750Ok) readings.lux = bh1750ReadLux();
+  if (bh1750Ok) {
+    readings.lux = bh1750ReadLux();
+    bh1750Rearm();
+  }
   screenDirty = true;
 }
 

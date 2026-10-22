@@ -48,3 +48,21 @@ Added ArduinoOTA, started only after Wi-Fi connects. Firmware now updates from t
 - BH1750 driven with raw I2C commands from the datasheet (power on, reset, continuous high-res; lux = count / 1.2), auto-detected at boot.
 - `cmd/screen` topic (`on` / `off` / `auto`): first command path from the hub to a node.
 - MQTT connect timeout cut from the library's 30 s default to 3 s, and reconnects back off to 30 s, so a missing broker no longer freezes the loop.
+
+## 2026-10-21 — I2C bring-up of the OLED + BH1750
+- Neither new module was detected: both were wired into strips on a separate breadboard piece. Moving their jumpers into the BME280's strips fixed it; scanner now shows 0x23, 0x3C, 0x76. Full write-up: [case study](case-studies/2026-10-21-i2c-modules-not-detected.md).
+- New reusable tool: [`tools/i2c-scanner`](../tools/i2c-scanner) (continuous scan, names devices, flags missing ones).
+- Repo reorganised: car code moved to **garage-lab**, repair work to **bench-lab**; SOPs and case studies added under `docs/`.
+
+## 2026-10-21 — v0.3 on hardware
+- `meta`: fw 0.3.0, bme280/oled/bh1750 all true, RSSI −44 to −55 dBm, heap flat at ~207 KB.
+- BH1750: ~10.8 lux facing down, 2816.7 lux under a phone flashlight, 0 covered.
+- BME280: 27.7 °C vs 27 °C on the multimeter's thermocouple in the same room (heating on). Humidity jumped to 78.6 % when breathed on, then recovered.
+- OLED wakes on motion and sleeps after 60 s.
+- Found stale retained topics from an older `livingroom` config; cleared with an empty retained publish (`-r -n`).
+- Hub unreachable at first: the terminal was WSL, which can't resolve `hub.local` (mDNS). PowerShell or the Pi's IP works.
+
+## 2026-10-21 — v0.3.1: BH1750 stuck at 0 lux
+**Symptom:** light dropped from ~28,000 lux (flashlight) to exactly 0 and stayed there; `meta` still showed `bh1750: true`.
+**Diagnosis:** the read still returned 2 bytes, so the sensor was answering on I2C. Exactly 0 with room lights on points to the module having restarted in power-down mode after a supply glitch while the connections were being checked. The firmware only sent power-on + continuous mode once at boot.
+**Fix:** v0.3.1 re-arms the sensor after every read (power on + continuous mode, no reset).

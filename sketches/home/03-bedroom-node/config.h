@@ -6,7 +6,7 @@
 // ---------- Identity (drives every MQTT topic: apartment/<ROOM>/<DEVICE_ID>/...) ----------
 constexpr char ROOM[]       = "bedroom";
 constexpr char DEVICE_ID[]  = "esp32-01";
-constexpr char FW_VERSION[] = "0.3.0";
+constexpr char FW_VERSION[] = "0.3.1";
 
 // ---------- Pins (ELEGOO ESP-WROOM-32 30-pin dev board) ----------
 constexpr uint8_t PIN_I2C_SDA = 21;  // shared I2C bus: BME280, OLED, BH1750

@@ -6,14 +6,17 @@
 
 ## Layout
 - `sketches/<category>/<kebab-name>/<kebab-name>.ino` — Arduino IDE requires folder name == .ino name
-- Categories: `home/` (apartment sensing/automation), `robotics/` (actuators, motion, robot), `automotive/` (car data logging and accessories; read-only, never transmit on CAN)
+- Categories: `home/` (apartment sensing/automation), `robotics/` (actuators, motion, robot). Car code lives in the separate `garage-lab` repo; hardware repairs in `bench-lab`.
+- `tools/<kebab-name>/<kebab-name>.ino` — diagnostic/bring-up sketches (no OTA); listed in `tools/README.md`
 - Each category has a README index; add new sketches to it
 - `sketches/<category>/<name>/README.md` — from `templates/sketch-README.md`
 - `sketches/<category>/<name>/config.h` — non-secret constants (room, device ID, pins, timing)
 - `sketches/<category>/<name>/secrets.h` — gitignored; copy from `shared/secrets.example.h`
 - `shared/` — `secrets.example.h`, `topics.md`
 - `pi/` — Python scripts; `hub/node-red/flows.json`, `hub/mosquitto/*.conf` (no passwords)
-- `cad/` — enclosures (OpenSCAD/STEP/3MF); `docs/` — longer notes, build log, photos
+- `cad/` — enclosures (OpenSCAD/STEP/3MF)
+- `docs/` — `sop/` (procedures), `case-studies/` (one problem each), `build-log.md`, `img/`; index in `docs/README.md`
+- `templates/` — `sketch-template/`, `sketch-README.md`, `sop-template.md`, `case-study-template.md`
 
 ## Build / flash
 - Toolchain: Arduino IDE 2.x or `arduino-cli`, core `esp32:esp32@3.3.x`, FQBN `esp32:esp32:esp32`
@@ -35,5 +38,6 @@
 
 ## Before finishing a task
 - Compile the touched sketch with arduino-cli; fix all warnings you introduced
-- Update the sketch README and `shared/topics.md` if topics changed
+- Update the sketch README, the category README and `shared/topics.md` if topics changed
+- Debugging that took real effort → write a case study in `docs/case-studies/` and link it in `docs/README.md`; repeatable procedures → an SOP in `docs/sop/`
 - Summarize: what changed, wiring changes, what I need to test on hardware

@@ -1,6 +1,8 @@
 # iot-lab
 
-A home IoT system built from scratch: ESP32 sensor nodes publish over MQTT to a Raspberry Pi hub, which runs Mosquitto and Node-RED and serves a live multi-page dashboard. This repo holds the firmware, hub configuration and build notes as the system grows toward robotics.
+A home IoT system built from scratch: ESP32 sensor nodes publish over MQTT to a Raspberry Pi hub, which runs Mosquitto and Node-RED and serves a live multi-page dashboard. This repo holds the firmware, hub configuration, SOPs and case studies as the system grows toward robotics.
+
+**Sister repos:** **garage-lab** (car repair SOPs, OBD-II and read-only CAN tools) · **bench-lab** (repair bench: SOPs, scripts and case studies for hardware fixes).
 
 > Photos of the hardware and dashboard go in [`docs/img/`](docs/img/).
 
@@ -29,21 +31,22 @@ flowchart LR
 
 ## Sketches
 
-Sketches are grouped into three categories:
-
 | Category | Folder | Focus |
 |---|---|---|
 | 🏠 Home improvement | [`sketches/home/`](sketches/home) | apartment sensing and automation on the MQTT hub |
 | 🤖 Robotics | [`sketches/robotics/`](sketches/robotics) | actuators, motion, sensing, a dashboard-driven robot |
-| 🚗 Automotive | [`sketches/automotive/`](sketches/automotive) | read-only car data logging and cabin accessories |
+| 🧪 Tools | [`tools/`](tools) | diagnostic and bring-up sketches (I2C scanner), not deployed firmware |
 
 | # | Sketch | What it shows | Status |
 |---|---|---|---|
 | home/01 | [`01-blink`](sketches/home/01-blink) | toolchain bring-up, non-blocking timing | ✅ |
 | home/02 | [`02-bme280-bringup`](sketches/home/02-bme280-bringup) | I2C bus scan, chip-ID verification (BME280 vs BMP280), sensor reads | ✅ |
-| home/03 | [`03-bedroom-node`](sketches/home/03-bedroom-node) | multi-sensor MQTT node: state machines, Last Will, backoff reconnects, OTA, motion-wake OLED, register-level BH1750 driver | ✅ v0.2 on hardware · v0.3 in test |
+| home/03 | [`03-bedroom-node`](sketches/home/03-bedroom-node) | multi-sensor MQTT node: state machines, Last Will, backoff reconnects, OTA, motion-wake OLED, register-level BH1750 driver | ✅ v0.3 on hardware (soak test pending) |
 
-Robotics and automotive sketches are planned; see each folder's README.
+Robotics sketches are planned; see [`sketches/robotics/`](sketches/robotics).
+
+## Documentation
+SOPs (flashing, breadboarding, I2C bring-up), case studies and the build log: [`docs/`](docs/README.md).
 
 ## Hardware
 
@@ -65,13 +68,14 @@ Robotics and automotive sketches are planned; see each folder's README.
 
 ## Repo layout
 ```
-sketches/   home/, robotics/, automotive/ — one folder per sketch (folder name == .ino name)
+sketches/   home/, robotics/ — one folder per sketch (folder name == .ino name)
+tools/      diagnostic sketches (i2c-scanner); flash, use, then re-flash the node
 shared/     secrets template + MQTT topic reference
-templates/  starting point for new sketches
+templates/  new sketch, SOP and case-study templates
 hub/        Mosquitto config and Node-RED flows for the Pi
 pi/         Python scripts for the hub (planned)
 cad/        enclosure designs (planned)
-docs/       build log and photos
+docs/       SOPs, case studies, build log, photos
 ```
 
 ## Getting started
@@ -90,3 +94,7 @@ Debugging stories and lessons: [`docs/build-log.md`](docs/build-log.md).
 - [ ] Door/window reed switch node
 - [ ] Plant / grow-tent node (soil moisture, DS18B20, VPD in Node-RED)
 - [ ] Servo and distance sensing → two-wheel robot controlled over MQTT
+
+### Later (not started)
+- Port a node from Arduino C++ to C on ESP-IDF (FreeRTOS tasks, native drivers)
+- Replace Node-RED Dashboard with a self-built dashboard (own backend subscribing to MQTT)

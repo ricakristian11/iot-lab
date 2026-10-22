@@ -2,7 +2,7 @@
 
 - **Goal:** permanent bedroom sensor node: climate, motion, light, and a status screen that wakes on motion. Reports to the Pi hub over MQTT and updates over Wi-Fi.
 - **Board:** ELEGOO ESP32 (ESP-WROOM-32, 30-pin, CP2102 USB-UART), arduino-esp32 core 3.3.x
-- **Status:** v0.2 (BME280 + PIR + MQTT + OTA) running on hardware. v0.3 (OLED motion-wake, forced-mode BME280, BH1750, `cmd/screen`) is new: OLED part pending hardware test, BH1750 untested until the sensor arrives.
+- **Status:** v0.3 running on hardware (breadboard) since 2026-10-21: OLED motion-wake, forced-mode BME280, BH1750 light, `cmd/screen`. Remaining checks: `cmd/screen`, LWT, OTA, 24 h soak. Next: perfboard.
 
 ## Libraries (versions)
 | Library | Version | Notes |
@@ -72,3 +72,4 @@ mosquitto_pub -h localhost -u hubuser -P '<password>' -t apartment/bedroom/esp32
 - Header pins must run along numbered breadboard rows. Across a–e they short together.
 - `D33` and `D35` look alike on the silkscreen. The PIR stayed silent until the wire was moved.
 - Verify a "BME280" by chip ID: `0x60` = BME280, `0x58` = BMP280 (no humidity).
+- **v0.3.1:** the BH1750 is re-armed (power on + continuous mode) after every read. A supply glitch from wiggling a wire restarts it in power-down mode, where it still answers on I2C but reads 0 lux forever.
