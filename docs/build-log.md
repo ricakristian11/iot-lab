@@ -72,3 +72,8 @@ Added ArduinoOTA, started only after Wi-Fi connects. Firmware now updates from t
 - At 16:57 `uptime_s` restarted from 0: the node **rebooted** (not a Wi-Fi drop). Because it reconnected with the same client ID before the broker had noticed the old connection was dead, the broker published the old connection's `offline` and the new `online` in the same second.
 - Cause unknown: the firmware didn't record why it started. v0.3.2 adds `reset` to `meta` (poweron / brownout / panic / watchdog …) to diagnose the next one.
 - **Most likely cause: the PC waking from sleep.** Windows logged "returned from low power state" (Power-Troubleshooter, event 1) at 16:57:29; the node booted ~4 s later (≈16:57:33). No restart/shutdown events (1074/6005/6006) in that window. Whether a USB port loses power on resume depends on the motherboard/BIOS. Fix: the node now runs from a USB wall charger.
+
+## 2026-10-23 — Motion event log on the dashboard
+- New Motion-page table: Start / End / Duration per motion event, newest first, saved in Node-RED's file-backed context so it survives restarts ([hub/node-red/README.md](../hub/node-red/README.md#motion-log)).
+- Bursts within 60 s merge into one event, so the PIR's on/off toggling doesn't flood the table.
+- **Gotchas found while building:** ui-table defaulted to *Append*, which stacked a copy of the whole list on every update (switched to *Replace*); the Clear button's Topic was set to "copy msg.topic" instead of the string `clear`; the retained motion value replayed on reconnect is filtered with `msg.retain`.

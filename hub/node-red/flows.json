@@ -273,6 +273,21 @@
         "tab": ""
     },
     {
+        "id": "2fc323a57b55fb94",
+        "type": "ui-group",
+        "name": "Motion log",
+        "page": "0665987d9333b184",
+        "width": 6,
+        "height": 1,
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "tab": ""
+    },
+    {
         "id": "5f813a1cac6eb65f",
         "type": "mqtt in",
         "z": "1dd859827f0fa913",
@@ -632,6 +647,142 @@
         "wires": []
     },
     {
+        "id": "8343033798667245",
+        "type": "mqtt in",
+        "z": "d5871ab58e5eb178",
+        "name": "motion in",
+        "topic": "apartment/bedroom/esp32-01/motion",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "4a31bd33f32a496d",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 380,
+        "wires": [
+            [
+                "300b3f502257f231"
+            ]
+        ]
+    },
+    {
+        "id": "6d8dbc78b85c741e",
+        "type": "inject",
+        "z": "d5871ab58e5eb178",
+        "name": "load on start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "load",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "300b3f502257f231"
+            ]
+        ]
+    },
+    {
+        "id": "c3e496e822c74b3c",
+        "type": "ui-button",
+        "z": "d5871ab58e5eb178",
+        "group": "169a77accc945329",
+        "name": "",
+        "label": "Clear log",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "clear",
+        "payloadType": "str",
+        "topic": "clear",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "300b3f502257f231"
+            ]
+        ]
+    },
+    {
+        "id": "300b3f502257f231",
+        "type": "function",
+        "z": "d5871ab58e5eb178",
+        "name": "motion events",
+        "func": "// motion events — turns motion 0/1 messages into start/end/duration rows\n// Inputs: MQTT motion {motion:0|1}, topic \"load\" (restore on start), topic \"clear\"\nconst STORE = 'file';           // file-backed context (settings.js)\nconst MAX_EVENTS = 300;         // keep the newest N events\nconst MERGE_GAP_MS = 60 * 1000; // motion within 60 s of the last event's end extends it\nconst TZ = 'America/New_York';\n\nlet events = flow.get('motionEvents', STORE) || [];   // [{startMs, endMs}], newest first\nlet openStart = flow.get('motionOpenStart', STORE) || null;\n\nfunction fmt(ms) {\n    return new Date(ms).toLocaleString('en-US', { timeZone: TZ, hour12: false });\n}\nfunction tableRows() {\n    return events.map(e => ({\n        Start: fmt(e.startMs),\n        End: fmt(e.endMs),\n        Duration: Math.round((e.endMs - e.startMs) / 1000) + ' s'\n    }));\n}\nfunction save() {\n    flow.set('motionEvents', events, STORE);\n    flow.set('motionOpenStart', openStart, STORE);\n}\n\nif (msg.topic === 'load') {\n    return { payload: tableRows() };\n}\nif (msg.topic === 'clear') {\n    events = [];\n    openStart = null;\n    save();\n    return { payload: [] };\n}\n\n// The broker replays the retained motion value whenever Node-RED reconnects.\n// That's not a new event, so ignore it.\nif (msg.retain) return null;\n\nconst motion = msg.payload && msg.payload.motion;\nconst now = Date.now();\n\nif (motion === 1 && openStart === null) {\n    // Reopen the last event if motion returns within the merge gap\n    if (events.length && now - events[0].endMs < MERGE_GAP_MS) {\n        openStart = events.shift().startMs;\n    } else {\n        openStart = now;\n    }\n    save();\n    return null;                // the row is written when motion ends\n}\n\nif (motion === 0 && openStart !== null) {\n    events.unshift({ startMs: openStart, endMs: now });\n    events = events.slice(0, MAX_EVENTS);\n    openStart = null;\n    save();\n    return { payload: tableRows() };\n}\n\nreturn null;                    // duplicate state (e.g. 0 after 0): nothing to do",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 500,
+        "wires": [
+            [
+                "c0b440faad99fa21"
+            ]
+        ]
+    },
+    {
+        "id": "c0b440faad99fa21",
+        "type": "ui-table",
+        "z": "d5871ab58e5eb178",
+        "group": "2fc323a57b55fb94",
+        "name": "",
+        "label": "Motion table",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "maxrows": 0,
+        "passthru": false,
+        "autocols": true,
+        "showSearch": true,
+        "deselect": true,
+        "selectionType": "none",
+        "columns": [],
+        "mobileBreakpoint": "sm",
+        "mobileBreakpointType": "defaults",
+        "action": "replace",
+        "className": "",
+        "x": 510,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "800f0de638fd2eda",
         "type": "mqtt in",
         "z": "9d42db8f0367d55d",
@@ -812,7 +963,7 @@
         ]
     },
     {
-        "id": "de1972fb96b22210",
+        "id": "840149349250762f",
         "type": "global-config",
         "env": [],
         "modules": {
