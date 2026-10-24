@@ -77,3 +77,9 @@ Added ArduinoOTA, started only after Wi-Fi connects. Firmware now updates from t
 - New Motion-page table: Start / End / Duration per motion event, newest first, saved in Node-RED's file-backed context so it survives restarts ([hub/node-red/README.md](../hub/node-red/README.md#motion-log)).
 - Bursts within 60 s merge into one event, so the PIR's on/off toggling doesn't flood the table.
 - **Gotchas found while building:** ui-table defaulted to *Append*, which stacked a copy of the whole list on every update (switched to *Replace*); the Clear button's Topic was set to "copy msg.topic" instead of the string `clear`; the retained motion value replayed on reconnect is filtered with `msg.retain`.
+
+## 2026-10-23 — v0.3.2 soak test passed
+- 26.5 h logged (2026-10-22 18:55 → 2026-10-23 21:27), node on a USB wall charger.
+- 0 `status offline`; every `meta` reported `"reset":"poweron"` (the one boot when it was moved to the charger), so no reboots.
+- `uptime_s` 480 → 96,000; heap 206,956 → 208,592 bytes (no leak); RSSI settled around −26 dBm next to the extender.
+- Cleared for the move to perfboard.

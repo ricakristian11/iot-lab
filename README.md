@@ -41,7 +41,7 @@ flowchart LR
 |---|---|---|---|
 | home/01 | [`01-blink`](sketches/home/01-blink) | toolchain bring-up, non-blocking timing | ✅ |
 | home/02 | [`02-bme280-bringup`](sketches/home/02-bme280-bringup) | I2C bus scan, chip-ID verification (BME280 vs BMP280), sensor reads | ✅ |
-| home/03 | [`03-bedroom-node`](sketches/home/03-bedroom-node) | multi-sensor MQTT node: state machines, Last Will, backoff reconnects, OTA, motion-wake OLED, register-level BH1750 driver | ✅ v0.3 on hardware (soak test pending) |
+| home/03 | [`03-bedroom-node`](sketches/home/03-bedroom-node) | multi-sensor MQTT node: state machines, Last Will, backoff reconnects, OTA, motion-wake OLED, register-level BH1750 driver | ✅ v0.3.2 on hardware, 26.7 h soak passed |
 
 Robotics sketches are planned; see [`sketches/robotics/`](sketches/robotics).
 

@@ -2,7 +2,7 @@
 
 - **Goal:** permanent bedroom sensor node: climate, motion, light, and a status screen that wakes on motion. Reports to the Pi hub over MQTT and updates over Wi-Fi.
 - **Board:** ELEGOO ESP32 (ESP-WROOM-32, 30-pin, CP2102 USB-UART), arduino-esp32 core 3.3.x
-- **Status:** v0.3 running on hardware (breadboard) since 2026-10-21: OLED motion-wake, forced-mode BME280, BH1750 light, `cmd/screen`. Remaining checks: `cmd/screen`, LWT, OTA, 24 h soak. Next: perfboard.
+- **Status:** v0.3.2 running on hardware (breadboard, USB wall charger): OLED motion-wake, forced-mode BME280, BH1750 light, `cmd/screen`, reset reason in `meta`. `cmd/screen`, Last Will and OTA verified; 26.7 h soak passed 2026-10-23 (0 offline, no reboots, heap flat). Next: perfboard.
 
 ## Libraries (versions)
 | Library | Version | Notes |

@@ -6,6 +6,6 @@ Apartment sensing and automation nodes that report to the Pi hub over MQTT (`apa
 |---|---|---|---|
 | 01 | [`01-blink`](01-blink) | toolchain bring-up, non-blocking timing | ✅ |
 | 02 | [`02-bme280-bringup`](02-bme280-bringup) | I2C scan, chip-ID check, BME280 readings | ✅ |
-| 03 | [`03-bedroom-node`](03-bedroom-node) | climate + motion + light node, motion-wake OLED, MQTT, OTA | ✅ v0.3 (soak test pending) |
+| 03 | [`03-bedroom-node`](03-bedroom-node) | climate + motion + light node, motion-wake OLED, MQTT, OTA | ✅ v0.3.2 (26.7 h soak passed) |
 
 Planned: door/window reed switch, plant and grow-tent node (soil moisture, DS18B20, VPD), desk presence + status display.
