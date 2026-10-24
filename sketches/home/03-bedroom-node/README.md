@@ -40,6 +40,8 @@ Unplug USB before rewiring. All sensors share one I2C bus (SDA/SCL).
 
 Expected I2C scan: `0x23` (BH1750), `0x3C` (OLED), `0x76` (BME280).
 
+Perfboard build (main board + crimped sensor leads): [perfboard.md](perfboard.md).
+
 ## MQTT topics
 Base: `apartment/bedroom/esp32-01`. Full table in [`shared/topics.md`](../../../shared/topics.md).
 - **pub:** `status` (LWT, retained), `climate`, `motion` (retained), `light`, `screen` (retained), `meta` (retained)
